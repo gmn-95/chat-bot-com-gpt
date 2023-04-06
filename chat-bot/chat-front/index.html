@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.6.4.js"></script>
+
+    <title>Chat</title>
+
+  </head>
+  <body>
+    <style>
+
+    </style>
+        <div class="container">
+            <div class="border">
+                <div class="scroll conteudo-chat">
+                </div>
+                <span>
+                    <div class="input-group mb-2">
+                        <input type="text" id="mensagem-usuario" class="form-control" placeholder="Digite uma mensagem..." aria-label="Digite uma mensagem..." aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="button"  onclick="testeRequest()" id="button-addon2">Enviar</button>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+  </body>
+</html>
+
+<script>
+    async function adicionaMensagemUsuario(){
+
+        var pergunta = document.getElementById("mensagem-usuario").value;
+        await $(function(){
+            $(".conteudo-chat").append("<div class='message to'>" + pergunta + "</div>");
+        });
+
+        var $target = $('.scroll');
+            $target.animate({
+                scrollTop: $target.height()
+            }, 1000);
+
+        limpaInput();
+    }
+
+    function adicionaMensagemChat(response){
+        $(function(){
+            $(".conteudo-chat").append("<div class='message from'>" + response + "</div>");
+        });
+    }
+
+    async function limpaInput(){
+        $("#mensagem-usuario").val('');
+    }
+
+    function testeRequest(){
+        var url = "http://localhost:8080/chat/pergunta"
+        
+        adicionaMensagemUsuario()
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: JSON.stringify(document.getElementById("mensagem-usuario").value),
+            contentType: 'application/json; charset=utf-8',
+            success: function(response){
+                adicionaMensagemChat(response);
+            }
+        })
+        
+    }
+</script>
