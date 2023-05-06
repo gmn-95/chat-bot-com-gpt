@@ -15,9 +15,42 @@
 
   </head>
   <body>
-    <style>
+<style>
+    #chatbox {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    width: 350px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 9998;
+    display: none; /* Ocultar por padrão */
+    } 
 
-    </style>
+    #floating-button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    } 
+
+.tipoChat.selected {
+    background-color: blue;
+    color: rgb(255, 255, 255);
+}
+
+</style>
         <div class="container">
             <div class="border">
                 <div class="scroll conteudo-chat">
@@ -25,9 +58,15 @@
                 <span>
                     <div class="input-group mb-2">
                         <input type="text" id="mensagem-usuario" class="form-control" placeholder="Digite uma mensagem..." aria-label="Digite uma mensagem..." aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="button"  onclick="testeRequest()" id="button-addon2">Enviar</button>
+                        <button class="btn btn-primary" type="button"  onclick="interacaoComOChatRequest()" id="button-addon2">Enviar</button>
                     </div>
                 </span>
+            </div>
+            <br>
+            <div id="button-group">
+                <button id="button1" class="tipoChat selected btn btn-secondary" onclick="alteraTipoDoChat(this)" value="ChatBotHotelPets">ChatBot hotel para pets</button>
+                <button id="button2" class="tipoChat btn btn-secondary" onclick="alteraTipoDoChat(this)" value="ChatBotFarmacia">ChatBot de farmácia</button>
+                <button id="button3" class="tipoChat btn btn-secondary" onclick="alteraTipoDoChat(this)" value="ChatBotPizzaria">ChatBot Pizzaria</button>
             </div>
         </div>
         
@@ -35,6 +74,26 @@
 </html>
 
 <script>
+
+
+    const buttons = document.querySelectorAll('.tipoChat');
+    const defaultButton = document.querySelector('.tipoChat.selected');
+
+    buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        buttons.forEach(otherButton => {
+        if (otherButton !== button) {
+            otherButton.classList.remove('selected');
+        }
+        });
+        button.classList.add('selected');
+    });
+    });
+    
+    if (defaultButton) {
+        defaultButton.click();
+    }
+
     async function adicionaMensagemUsuario(){
 
         var pergunta = document.getElementById("mensagem-usuario").value;
@@ -42,12 +101,16 @@
             $(".conteudo-chat").append("<div class='message to'>" + pergunta + "</div>");
         });
 
-        var $target = $('.scroll');
-            $target.animate({
-                scrollTop: $target.height()
-            }, 1000);
+        desceScroll();
 
         limpaInput();
+    }
+
+    function desceScroll(){
+        var $target = $('.scroll');
+        $target.animate({
+            scrollTop: $target.height()
+        }, 1000);
     }
 
     function adicionaMensagemChat(response){
@@ -57,10 +120,12 @@
     }
 
     async function limpaInput(){
-        $("#mensagem-usuario").val('');
+        $("#mensagem-usuario").val('')
     }
 
-    function testeRequest(){
+    
+
+    function interacaoComOChatRequest(){
         var url = "http://localhost:8080/chat/pergunta"
         
         adicionaMensagemUsuario()
@@ -72,8 +137,30 @@
             contentType: 'application/json; charset=utf-8',
             success: function(response){
                 adicionaMensagemChat(response);
+                desceScroll();
             }
         })
         
     }
+
+    function alteraTipoDoChat(valor){
+
+        $(".conteudo-chat").empty();
+
+        var url = "http://localhost:8080/chat/tipoChat"
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: valor.value,
+            contentType: 'application/json; charset=utf-8',
+            success: function(response){
+            }
+            // ,
+            // error: function(jqXHR, textStatus, errorThrown){
+            //     alert(jqXHR.responseText);
+            // }
+        })
+    }
+
 </script>
