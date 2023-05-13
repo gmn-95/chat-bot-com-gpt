@@ -5,23 +5,38 @@ import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.completion.chat.ChatMessageRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * Classe que centraliza as principais características em comum entre os chats,
+ * e configurações padrões.
+ * */
 public abstract class AbstractChatBot {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractChatBot.class);
 
+    /**
+     * Lista contendo o contexto da contexto da conversa entre chat e usuario
+     * */
     protected List<String> contexto;
 
-//    private final String API_KEY = "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";
-
+    /**
+     * Key necessária para realizar as requisições
+     * */
     private final String API_KEY = "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";
 
+    /**
+     * Qual a temperatura de amostragem a ser usada, entre 0 e 2. Valores mais altos como 0,8 tornarão a saída mais
+     * aleatória, enquanto valores mais baixos como 0,2 a tornarão mais focada e determinística.
+     * */
     private final Double TEMPERATURA = 0.01;
 
+    /**
+     * Modelo a ser usado no projeto
+     * */
     private final String MODELO = "gpt-3.5-turbo";
 
     protected String regrasPadrao(){
@@ -58,6 +73,9 @@ public abstract class AbstractChatBot {
         return conteudo.toString();
     }
 
+    /**
+     * Configuração do chat: define como o chatbot deve se comportar
+     * */
     public List<ChatMessage> getConfigChatMessage(ChatMessage user, AbstractChatBot chatBotClass) {
         List<ChatMessage> messagesConfig = new ArrayList<>();
 
