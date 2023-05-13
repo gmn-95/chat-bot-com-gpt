@@ -5,6 +5,7 @@ import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.completion.chat.ChatMessageRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,9 @@ public abstract class AbstractChatBot {
 
     protected List<String> contexto;
 
-    private final String API_KEY = "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";
+//    private final String API_KEY = "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";
+
+    private final String API_KEY = "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";
 
     private final Double TEMPERATURA = 0.01;
 
@@ -69,21 +72,21 @@ public abstract class AbstractChatBot {
         return messagesConfig;
     }
 
-    public void verificaTamanhoDaConfig(StringBuilder conteudo){
+    protected void verificaTamanhoDaConfig(StringBuilder conteudo){
         if(conteudo.length() > 4097){
             LOGGER.info("Quantidade de tokens: " + conteudo.length() );
             throw new RuntimeException("Excedeu o limite de tokens");
         }
     }
 
-    public ChatMessage getConfigAssistent() {
+    protected ChatMessage getConfigAssistent() {
         StringBuilder conteudo = new StringBuilder();
 
-        if(this.contexto != null){
-            if(!getContexto().isEmpty()){
-                conteudo.append(getContexto());
-            }
+        if(this.contexto != null && !contexto.isEmpty()){
+            conteudo.append(contexto);
         }
+
+        verificaTamanhoDaConfig(conteudo);
 
         return new ChatMessage(ChatMessageRole.ASSISTANT.value(), conteudo.toString());
     }

@@ -67,7 +67,6 @@ public class ChatBotPizzaria extends AbstractChatBot{
                 "Pergunte ao usuário o endereço de entrega."
         );
 
-        verificaTamanhoDaConfig(conteudo);
 
         return new ChatMessage(ChatMessageRole.SYSTEM.value(), conteudo.toString());
     }

@@ -8,11 +8,19 @@ public class ChatBotFarmacia extends AbstractChatBot{
     @Override
     public ChatMessage  geConfigSystem() {
         StringBuilder conteudo = new StringBuilder();
-        conteudo.append("Você será um chatbot de uma farmácia chamada Pharmazen");
+        conteudo.append(
+                "Você será um chatbot de uma farmácia chamada Pharmazen."
+        );
         conteudo.append(regrasPadrao());
-        conteudo.append("Nosso telefone é:: (11) 5678-5678.");
-        conteudo.append("Nosso endereço é: Rua dos remédios, nº 582, Bairro do dipirona, Cidade do rivotril.");
-        conteudo.append("Nome da nossa farmácia: PharmaZen.");
+        conteudo.append(
+                "Nosso telefone é:: (11) 5678-5678."
+        );
+        conteudo.append(
+                "Nosso endereço é: Rua dos remédios, nº 582, Bairro do dipirona, Cidade do rivotril."
+        );
+        conteudo.append(
+                "Nome da nossa farmácia: PharmaZen."
+        );
         conteudo.append(
                 "Nossos Produtos e serviços: " +
                 "Venda de medicamentos," +

@@ -39,6 +39,7 @@ public class ChatBotService {
 
             contextoConversa.add("user: " + perguntaUser);
             chatBot.setContexto(contextoConversa);
+
             List<ChatMessage> messages = new ArrayList<>(chatBot.getConfigChatMessage(user, chatBot));
 
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
