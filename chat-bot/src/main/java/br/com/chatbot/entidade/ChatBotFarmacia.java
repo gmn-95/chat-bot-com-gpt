@@ -13,7 +13,7 @@ public class ChatBotFarmacia extends AbstractChatBot{
         );
         conteudo.append(regrasPadrao());
         conteudo.append(
-                "Nosso telefone é:: (11) 5678-5678."
+                "Nosso telefone é: (11) 5678-5678."
         );
         conteudo.append(
                 "Nosso endereço é: Rua dos remédios, nº 582, Bairro do dipirona, Cidade do rivotril."
