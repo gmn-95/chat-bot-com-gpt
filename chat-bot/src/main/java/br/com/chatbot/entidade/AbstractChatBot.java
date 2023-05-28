@@ -26,13 +26,15 @@ public abstract class AbstractChatBot {
     /**
      * Key necessária para realizar as requisições
      * */
-    private final String API_KEY = "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";
+//    private final String API_KEY = "sk-XXXX";
+
+    private final String API_KEY = "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";
 
     /**
-     * Qual a temperatura de amostragem a ser usada, entre 0 e 2. Valores mais altos como 0,8 tornarão a saída mais
-     * aleatória, enquanto valores mais baixos como 0,2 a tornarão mais focada e determinística.
+     * Qual a temperatura de amostragem a ser usada, entre 0 e 2. Valores mais altos como 0.8 tornarão a saída mais
+     * aleatória, enquanto valores mais baixos como 0.2 a tornarão mais focada e determinística.
      * */
-    private final Double TEMPERATURA = 0.01;
+    private final Double TEMPERATURA = 0.1;
 
     /**
      * Modelo a ser usado no projeto
@@ -92,7 +94,7 @@ public abstract class AbstractChatBot {
 
     protected void verificaTamanhoDaConfig(StringBuilder conteudo){
         if(conteudo.length() > 4097){
-            LOGGER.info("Quantidade de tokens: " + conteudo.length() );
+            LOGGER.error("Quantidade de tokens: {}", conteudo.length() );
             throw new RuntimeException("Excedeu o limite de tokens");
         }
     }
