@@ -43,9 +43,6 @@ public class ChatBotPizzaria extends AbstractChatBot{
                         "Pepperoni: R$ 50,00." +
                         "Vegetariana: R$ 50,00."
         );
-//        conteudo.append(
-//                "Informar sempre as pizzas e seus preços."
-//        );
         conteudo.append(
                 "Sempre confirme o pedido completo, incluindo forma de pagamento e endereço."
         );

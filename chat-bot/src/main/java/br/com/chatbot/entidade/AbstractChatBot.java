@@ -28,7 +28,7 @@ public abstract class AbstractChatBot {
      * */
 //    private final String API_KEY = "sk-XXXX";
 
-    private final String API_KEY = "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";
+    private final String API_KEY = "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";
 
     /**
      * Qual a temperatura de amostragem a ser usada, entre 0 e 2. Valores mais altos como 0.8 tornarão a saída mais
