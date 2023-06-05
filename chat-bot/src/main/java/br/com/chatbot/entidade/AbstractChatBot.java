@@ -24,11 +24,9 @@ public abstract class AbstractChatBot {
     protected List<String> contexto;
 
     /**
-     * Key necessária para realizar as requisições
+     * Key necessária para realizar as requisições. Obter a KEY de acordo com sua conta
      * */
-//    private final String API_KEY = "sk-XXXX";
-
-    private final String API_KEY = "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";
+    private final String API_KEY = "sk-XXXX";
 
     /**
      * Qual a temperatura de amostragem a ser usada, entre 0 e 2. Valores mais altos como 0.8 tornarão a saída mais
